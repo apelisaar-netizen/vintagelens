@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2f0eb" />
+    <meta name="description" content="Avasta objektiive päris näidisfotode kaudu. Fookus koondab Flickrist pärit pildid ja autorite kirjeldatud võtteandmed." />
+    <title>Fookus — objektiivid pildis</title>
+    <link rel="preconnect" href="https://live.staticflickr.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#algus" aria-label="Fookus, avaleht"><span class="brand-mark">f.</span><span>fookus</span></a>
+      <nav class="main-nav" aria-label="Põhinavigatsioon">
+        <a class="nav-link is-active" href="#galerii">Avasta</a>
+        <a class="nav-link" href="#kuidas">Kuidas valida</a>
+        <a class="nav-link" href="#allikad">Allikad</a>
+      </nav>
+      <a class="top-cta" href="#galerii">Vaata galeriid <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="algus">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Objektiivide näidisgalerii</p>
+          <h1 id="hero-title">Vaata maailma<br />läbi <em>teise klaasi.</em></h1>
+          <p class="hero-text">Leia objektiiv, mille vaatenurk ja iseloom sobivad sinu pildiga. Päris fotod, päris autorid ja allikast kontrollitud võtteinfo.</p>
+          <a class="hero-button" href="#galerii">Sirvi näidispilte <span aria-hidden="true">↓</span></a>
+          <div class="hero-proof"><span class="proof-avatars" aria-hidden="true"><i>12</i><i>50</i><i>85</i></span><span>Fotod autoritelt, kes jagavad oma võtteid</span></div>
+        </div>
+        <a class="hero-image" href="https://www.flickr.com/photos/ellenvddoelfoto/34966012692" target="_blank" rel="noreferrer" aria-label="Vaata Ellen van den Doeli fotot Flickr-is">
+          <img src="https://live.staticflickr.com/4259/34966012692_65102e598f.jpg" alt="Lai vaade päikeseloojangule mererannas" fetchpriority="high" />
+          <div class="hero-image-shade"></div>
+          <div class="hero-photo-caption"><span class="photo-location">PÄIKESELOOJANG · FLICKR</span><span class="caption-title">Wide angle sunset <span>↗</span></span><span class="caption-by">Ellen van den Doel · Laowa 12mm f/2.8</span></div>
+          <span class="lens-stamp">12<small>mm</small></span>
+        </a>
+        <div class="hero-side-note"><span class="side-line"></span><span>ÜKS STSEEN<br />MITU VAATENURKA</span></div>
+      </section>
+
+      <section class="gallery-section" id="galerii" aria-labelledby="gallery-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">Vali vaatenurk</p><h2 id="gallery-title">Leia oma <em>fookus.</em></h2></div>
+          <p class="section-intro">Sirvi pilte objektiivi järgi. Iga foto viib algallika ja autori juurde.</p>
+        </div>
+
+        <div class="filter-row">
+          <div class="filters" role="group" aria-label="Filtreeri objektiivi järgi">
+            <button class="filter-chip is-selected" type="button" data-filter="all" aria-pressed="true">Kõik <span>06</span></button>
+            <button class="filter-chip" type="button" data-filter="wide" aria-pressed="false">Lainurk <span>04</span></button>
+            <button class="filter-chip" type="button" data-filter="normal" aria-pressed="false">Tavaobjektiiv <span>01</span></button>
+            <button class="filter-chip" type="button" data-filter="portrait" aria-pressed="false">Portree <span>02</span></button>
+          </div>
+          <label class="search-box"><span class="sr-only">Otsi objektiivi või pildi järgi</span><span class="search-icon" aria-hidden="true">⌕</span><input id="photo-search" type="search" placeholder="Otsi objektiivi või pilti" autocomplete="off" /></label>
+        </div>
+
+        <div class="gallery-grid" id="photo-grid" aria-live="polite">
+          <article class="photo-card card-large" data-kind="wide" data-search="laowa 12mm f2.8 sunset päikeseloojang ellenvandendoel lainurk">
+            <a class="photo-link" href="https://www.flickr.com/photos/ellenvddoelfoto/34966012692" target="_blank" rel="noreferrer" aria-label="Ava Wide angle sunset Flickr-is">
+              <img src="https://live.staticflickr.com/4259/34966012692_65102e598f.jpg" alt="Päikeseloojang mere kohal, lai vaade rannale" loading="lazy" />
+              <span class="image-overlay"></span><span class="card-topline"><span class="pill">ÜLILAINURK</span><span class="arrow-bubble" aria-hidden="true">↗</span></span>
+              <span class="card-copy"><span class="card-lens">Laowa 12mm f/2.8</span><span class="card-title">Wide angle sunset</span><span class="card-author">Ellen van den Doel <span>·</span> Flickr</span></span>
+            </a>
+          </article>
+          <article class="photo-card" data-kind="wide" data-search="sony zeiss 16-35mm f4 sydney harbor sadam mark galer lainurk">
+            <a class="photo-link" href="https://www.flickr.com/photos/markgaler/albums/72157647309662617/" target="_blank" rel="noreferrer" aria-label="Ava Sydney Harbour näidisfoto Flickr-i objektiivialbumis">
+              <img src="https://live.staticflickr.com/5595/15058237158_fc24ecff23_h.jpg" alt="Sadam ja linnasiluett laia vaatenurgaga" loading="lazy" />
+              <span class="image-overlay"></span><span class="card-topline"><span class="pill">LAI VAADE</span><span class="arrow-bubble" aria-hidden="true">↗</span></span>
+              <span class="card-copy"><span class="card-lens">Sony Zeiss FE 16–35mm f/4</span><span class="card-title">Sydney Harbour</span><span class="card-author">Mark Galer <span>·</span> Flickr</span></span>
+            </a>
+          </article>
+          <article class="photo-card" data-kind="portrait" data-search="samyang 85mm f1.4 child portrait portree steffen ostli">
+            <a class="photo-link" href="https://www.flickr.com/photos/steffos_1986/52591542404/" target="_blank" rel="noreferrer" aria-label="Ava Child portrait Flickr-is">
+              <img src="https://live.staticflickr.com/65535/52591542404_abe6b0d2d5.jpg" alt="Lapse portree pehme taustaga" loading="lazy" />
+              <span class="image-overlay"></span><span class="card-topline"><span class="pill">PORTREE</span><span class="arrow-bubble" aria-hidden="true">↗</span></span>
+              <span class="card-copy"><span class="card-lens">Samyang 85mm f/1.4</span><span class="card-title">Child portrait</span><span class="card-author">Steffen Østli <span>·</span> Flickr</span></span>
+            </a>
+          </article>
+          <article class="photo-card" data-kind="normal" data-search="canon ef 50mm f1.8 portrait lynda beppie k tavobjektiiv">
+            <a class="photo-link" href="https://www.flickr.com/photos/bepster/albums/72157600209251582/" target="_blank" rel="noreferrer" aria-label="Vaata Canon 50mm portreealbumit Flickr-is">
+              <img src="https://live.staticflickr.com/115/277042114_d77fe29efc_h.jpg" alt="Portree loomulikus valguses" loading="lazy" />
+              <span class="image-overlay"></span><span class="card-topline"><span class="pill">TAVAOBJEKTIIV</span><span class="arrow-bubble" aria-hidden="true">↗</span></span>
+              <span class="card-copy"><span class="card-lens">Canon EF 50mm f/1.8</span><span class="card-title">Lynda</span><span class="card-author">Beppie K <span>·</span> Flickr</span></span>
+            </a>
+          </article>
+          <article class="photo-card" data-kind="wide" data-search="sony zeiss fe 16-35 piha beach mark galer lainurk rand">
+            <a class="photo-link" href="https://www.flickr.com/photos/markgaler/albums/72157647309662617/" target="_blank" rel="noreferrer" aria-label="Vaata FE 16–35 mm näidispiltide albumit Flickr-is">
+              <img src="https://live.staticflickr.com/3881/15144080507_e1d22840df_h.jpg" alt="Rannajoon ja ookean laia vaatenurgaga" loading="lazy" />
+              <span class="image-overlay"></span><span class="card-topline"><span class="pill">LAI VAADE</span><span class="arrow-bubble" aria-hidden="true">↗</span></span>
+              <span class="card-copy"><span class="card-lens">Sony Zeiss FE 16–35mm f/4</span><span class="card-title">Piha Beach</span><span class="card-author">Mark Galer <span>·</span> Flickr</span></span>
+            </a>
+          </article>
+          <article class="photo-card" data-kind="wide" data-search="sony zeiss fe 16-35 eureka mark galer lainurk">
+            <a class="photo-link" href="https://www.flickr.com/photos/markgaler/albums/72157647309662617/" target="_blank" rel="noreferrer" aria-label="Vaata FE 16–35 mm näidispiltide albumit Flickr-is">
+              <img src="https://live.staticflickr.com/631/20694516323_1de8fae093_h.jpg" alt="Linnavaade laia vaatenurgaga" loading="lazy" />
+              <span class="image-overlay"></span><span class="card-topline"><span class="pill">LAI VAADE</span><span class="arrow-bubble" aria-hidden="true">↗</span></span>
+              <span class="card-copy"><span class="card-lens">Sony Zeiss FE 16–35mm f/4</span><span class="card-title">Eureka</span><span class="card-author">Mark Galer <span>·</span> Flickr</span></span>
+            </a>
+          </article>
+        </div>
+        <p class="empty-state" id="empty-state" hidden>Selle otsinguga pilte ei leitud. Proovi teist objektiivi või märksõna.</p>
+        <p class="source-note"><span class="note-icon">i</span> Objektiiviinfo pärineb foto autori kirjeldusest või albumi pealkirjast. Kogu fotode ja autorite info on leitav Flickr-ist.</p>
+      </section>
+
+      <section class="guide-section" id="kuidas" aria-labelledby="guide-title">
+        <div class="guide-heading"><p class="eyebrow">Lühike tee valikuni</p><h2 id="guide-title">Mida sa tahad<br /><em>kaadrisse mahutada?</em></h2><p>Fookuskaugus määrab, kui palju stseenist kaadrisse jõuab ja kuidas kaugused pildil tunduvad.</p></div>
+        <div class="guide-cards">
+          <article class="guide-card"><span class="guide-number">01</span><span class="guide-range">12–24 mm</span><h3>Ruum ja vaade</h3><p>Lai kaader maastikule, arhitektuurile ja väikestele ruumidele.</p><span class="guide-mark mark-wide" aria-hidden="true">⌜　⌝</span></article>
+          <article class="guide-card"><span class="guide-number">02</span><span class="guide-range">35–50 mm</span><h3>Loomulik pilk</h3><p>Igapäevased hetked, tänav ja vaated, mis mõjuvad tuttavalt.</p><span class="guide-mark mark-normal" aria-hidden="true">◉</span></article>
+          <article class="guide-card"><span class="guide-number">03</span><span class="guide-range">85 mm+</span><h3>Lähemale astumata</h3><p>Portreed, detailid ja kaugemad objektid rahuliku taustaga.</p><span class="guide-mark mark-tele" aria-hidden="true">◎</span></article>
+        </div>
+      </section>
+
+      <section class="closing" id="allikad">
+        <div><p class="eyebrow">Vaata originaali</p><h2>Hea foto algab<br />uudishimust.</h2></div>
+        <div class="closing-copy"><p>Fookus koondab fotograafide endi jagatud näidispildid ühte kohta. Ava foto, et näha algset kirjeldust, autorit ja kogu Flickr-i albumit.</p><a href="https://www.flickr.com/" target="_blank" rel="noreferrer" class="text-link">Avasta Flickr-is <span aria-hidden="true">↗</span></a></div>
+      </section>
+    </main>
+
+    <footer class="footer"><a class="brand footer-brand" href="#algus"><span class="brand-mark">f.</span><span>fookus</span></a><span>Fotod kuuluvad nende autoritele.</span><a href="#galerii">Tagasi üles ↑</a></footer>
+  </body>
+</html>
