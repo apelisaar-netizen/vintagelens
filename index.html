@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f2f0eb" />
-    <meta name="description" content="Avasta objektiive päris näidisfotode kaudu. Fookus koondab Flickrist pärit pildid ja autorite kirjeldatud võtteandmed." />
-    <title>Fookus — objektiivid pildis</title>
+    <meta name="description" content="Otsi objektiivi nime järgi Flickr-ist päris näidisfotosid." />
+    <title>vintagelens — objektiivide näidispildid</title>
     <link rel="preconnect" href="https://live.staticflickr.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +15,7 @@
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="#algus" aria-label="Fookus, avaleht"><span class="brand-mark">f.</span><span>fookus</span></a>
+      <a class="brand" href="#algus" aria-label="vintagelens, avaleht"><span class="brand-mark">v.</span><span>vintagelens</span></a>
       <nav class="main-nav" aria-label="Põhinavigatsioon">
         <a class="nav-link is-active" href="#galerii">Avasta</a>
         <a class="nav-link" href="#kuidas">Kuidas valida</a>
@@ -29,8 +29,8 @@
         <div class="hero-copy">
           <p class="eyebrow"><span class="eyebrow-dot"></span> Objektiivide näidisgalerii</p>
           <h1 id="hero-title">Vaata maailma<br />läbi <em>teise klaasi.</em></h1>
-          <p class="hero-text">Leia objektiiv, mille vaatenurk ja iseloom sobivad sinu pildiga. Päris fotod, päris autorid ja allikast kontrollitud võtteinfo.</p>
-          <a class="hero-button" href="#galerii">Sirvi näidispilte <span aria-hidden="true">↓</span></a>
+          <p class="hero-text">Sisesta objektiivi nimi ja vaata, milliseid pilte on sellega Flickr-is tehtud. Tulemused viivad alati algse foto ja autori juurde.</p>
+          <a class="hero-button" href="#galerii">Otsi objektiivi <span aria-hidden="true">↓</span></a>
           <div class="hero-proof"><span class="proof-avatars" aria-hidden="true"><i>12</i><i>50</i><i>85</i></span><span>Fotod autoritelt, kes jagavad oma võtteid</span></div>
         </div>
         <a class="hero-image" href="https://www.flickr.com/photos/ellenvddoelfoto/34966012692" target="_blank" rel="noreferrer" aria-label="Vaata Ellen van den Doeli fotot Flickr-is">
@@ -44,21 +44,36 @@
 
       <section class="gallery-section" id="galerii" aria-labelledby="gallery-title">
         <div class="section-heading">
-          <div><p class="eyebrow">Vali vaatenurk</p><h2 id="gallery-title">Leia oma <em>fookus.</em></h2></div>
-          <p class="section-intro">Sirvi pilte objektiivi järgi. Iga foto viib algallika ja autori juurde.</p>
+          <div><p class="eyebrow">Flickr-i fotootsing</p><h2 id="gallery-title">Otsi <em>objektiivi järgi.</em></h2></div>
+          <p class="section-intro">Kirjuta tootja ja mudel. Täpsem nimi annab tavaliselt paremad tulemused.</p>
         </div>
 
-        <div class="filter-row">
-          <div class="filters" role="group" aria-label="Filtreeri objektiivi järgi">
-            <button class="filter-chip is-selected" type="button" data-filter="all" aria-pressed="true">Kõik <span>06</span></button>
-            <button class="filter-chip" type="button" data-filter="wide" aria-pressed="false">Lainurk <span>04</span></button>
-            <button class="filter-chip" type="button" data-filter="normal" aria-pressed="false">Tavaobjektiiv <span>01</span></button>
-            <button class="filter-chip" type="button" data-filter="portrait" aria-pressed="false">Portree <span>02</span></button>
+        <form class="lens-search" id="lens-search" role="search">
+          <label for="lens-query">Objektiivi nimi</label>
+          <div class="lens-search-row">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="lens-query" name="q" type="search" placeholder="Näiteks Helios 44-2 58mm f/2" autocomplete="off" required />
+            <button type="submit">Otsi Flickr-ist <span aria-hidden="true">↗</span></button>
           </div>
-          <label class="search-box"><span class="sr-only">Otsi objektiivi või pildi järgi</span><span class="search-icon" aria-hidden="true">⌕</span><input id="photo-search" type="search" placeholder="Otsi objektiivi või pilti" autocomplete="off" /></label>
+          <div class="search-suggestions" aria-label="Näidisotsingud">
+            <span>Proovi:</span>
+            <button type="button" data-query="Helios 44-2 58mm">Helios 44-2</button>
+            <button type="button" data-query="Canon FD 50mm f1.4">Canon FD 50mm f/1.4</button>
+            <button type="button" data-query="Jupiter-9 85mm">Jupiter-9 85mm</button>
+          </div>
+        </form>
+
+        <div class="results-heading" id="results-heading" hidden>
+          <p id="results-summary"></p>
+          <a id="flickr-search-link" href="https://www.flickr.com/search/" target="_blank" rel="noreferrer">Vaata kõiki Flickr-is <span aria-hidden="true">↗</span></a>
         </div>
 
-        <div class="gallery-grid" id="photo-grid" aria-live="polite">
+        <div class="search-status" id="search-status" role="status" aria-live="polite">
+          <span class="status-mark">VL</span>
+          <div><strong>Millise objektiivi pilte soovid näha?</strong><p>Otsing kasutab Flickr-i avalikku fotovoogu ega vaja sisselogimist.</p></div>
+        </div>
+
+        <div class="gallery-grid" id="photo-grid" aria-live="polite" hidden>
           <article class="photo-card card-large" data-kind="wide" data-search="laowa 12mm f2.8 sunset päikeseloojang ellenvandendoel lainurk">
             <a class="photo-link" href="https://www.flickr.com/photos/ellenvddoelfoto/34966012692" target="_blank" rel="noreferrer" aria-label="Ava Wide angle sunset Flickr-is">
               <img src="https://live.staticflickr.com/4259/34966012692_65102e598f.jpg" alt="Päikeseloojang mere kohal, lai vaade rannale" loading="lazy" />
@@ -102,8 +117,7 @@
             </a>
           </article>
         </div>
-        <p class="empty-state" id="empty-state" hidden>Selle otsinguga pilte ei leitud. Proovi teist objektiivi või märksõna.</p>
-        <p class="source-note"><span class="note-icon">i</span> Objektiiviinfo pärineb foto autori kirjeldusest või albumi pealkirjast. Kogu fotode ja autorite info on leitav Flickr-ist.</p>
+        <p class="source-note"><span class="note-icon">i</span> Tulemused pärinevad Flickr-i avalikust märksõnavoost. Foto juures kuvatud objektiivi nimi on sinu otsing, mitte Flickr-i kinnitatud EXIF-andmed.</p>
       </section>
 
       <section class="guide-section" id="kuidas" aria-labelledby="guide-title">
@@ -117,10 +131,10 @@
 
       <section class="closing" id="allikad">
         <div><p class="eyebrow">Vaata originaali</p><h2>Hea foto algab<br />uudishimust.</h2></div>
-        <div class="closing-copy"><p>Fookus koondab fotograafide endi jagatud näidispildid ühte kohta. Ava foto, et näha algset kirjeldust, autorit ja kogu Flickr-i albumit.</p><a href="https://www.flickr.com/" target="_blank" rel="noreferrer" class="text-link">Avasta Flickr-is <span aria-hidden="true">↗</span></a></div>
+        <div class="closing-copy"><p>vintagelens aitab leida Flickr-ist päris näidispilte objektiivi nime järgi. Ava foto, et näha algset kirjeldust, autorit ja Flickr-is avaldatud andmeid.</p><a href="https://www.flickr.com/" target="_blank" rel="noreferrer" class="text-link">Avasta Flickr-is <span aria-hidden="true">↗</span></a></div>
       </section>
     </main>
 
-    <footer class="footer"><a class="brand footer-brand" href="#algus"><span class="brand-mark">f.</span><span>fookus</span></a><span>Fotod kuuluvad nende autoritele.</span><a href="#galerii">Tagasi üles ↑</a></footer>
+    <footer class="footer"><a class="brand footer-brand" href="#algus"><span class="brand-mark">v.</span><span>vintagelens</span></a><span>Fotod kuuluvad nende autoritele.</span><a href="#galerii">Tagasi üles ↑</a></footer>
   </body>
 </html>
