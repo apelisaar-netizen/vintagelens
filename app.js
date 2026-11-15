@@ -10,7 +10,7 @@ const suggestions = [...document.querySelectorAll("[data-query]")];
 let activeRequest = 0;
 
 function normalize(value) {
-  return value.toLocaleLowerCase("et").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+  return value.toLocaleLowerCase("en").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
 }
 
 function searchTags(query) {
@@ -31,7 +31,7 @@ function relevance(item, tokens, query) {
 
 function authorName(author) {
   const match = String(author || "").match(/\("(.+)"\)/);
-  return match ? match[1] : "Flickr-i autor";
+  return match ? match[1] : "Flickr photographer";
 }
 
 function largerImage(url) {
@@ -46,10 +46,10 @@ function makeCard(item, index, query) {
   link.href = item.link;
   link.target = "_blank";
   link.rel = "noreferrer";
-  link.setAttribute("aria-label", `Ava ${item.title || "foto"} Flickr-is`);
+  link.setAttribute("aria-label", `Open ${item.title || "photo"} on Flickr`);
   const image = document.createElement("img");
   image.src = largerImage(item.media?.m);
-  image.alt = item.title || `Näidisfoto objektiiviga ${query}`;
+  image.alt = item.title || `Sample photo matching ${query}`;
   image.loading = index < 3 ? "eager" : "lazy";
   image.addEventListener("error", () => { if (image.src !== item.media?.m) image.src = item.media?.m; }, { once: true });
   const overlay = document.createElement("span");
@@ -58,7 +58,7 @@ function makeCard(item, index, query) {
   topline.className = "card-topline";
   const pill = document.createElement("span");
   pill.className = `pill${index < 3 ? " best-match" : ""}`;
-  pill.textContent = index < 3 ? "PARIM VASTE" : "FLICKR";
+  pill.textContent = index < 3 ? "BEST MATCH" : "FLICKR";
   const arrow = document.createElement("span");
   arrow.className = "arrow-bubble";
   arrow.setAttribute("aria-hidden", "true");
@@ -71,7 +71,7 @@ function makeCard(item, index, query) {
   lens.textContent = query;
   const title = document.createElement("span");
   title.className = "card-title";
-  title.textContent = item.title || "Pealkirjata foto";
+  title.textContent = item.title || "Untitled photo";
   const author = document.createElement("span");
   author.className = "card-author";
   author.textContent = `${authorName(item.author)} · Flickr`;
@@ -101,7 +101,7 @@ function requestFeed(tags, tagmode, requestId) {
   return new Promise((resolve, reject) => {
     const callbackName = `vintagelensFeed${requestId}${tagmode}`;
     const script = document.createElement("script");
-    const timer = window.setTimeout(() => finish(new Error("Flickr-i vastus võttis liiga kaua aega.")), 12000);
+    const timer = window.setTimeout(() => finish(new Error("Flickr took too long to respond. Please try again.")), 12000);
     function finish(error, data) {
       window.clearTimeout(timer);
       script.remove();
@@ -109,7 +109,7 @@ function requestFeed(tags, tagmode, requestId) {
       error ? reject(error) : resolve(data?.items || []);
     }
     window[callbackName] = (data) => finish(null, data);
-    script.onerror = () => finish(new Error("Flickr-i fotovoogu ei saanud laadida."));
+    script.onerror = () => finish(new Error("Could not load photos from Flickr."));
     const params = new URLSearchParams({ tags: tags.join(","), tagmode, format: "json", jsoncallback: callbackName });
     script.src = `https://www.flickr.com/services/feeds/photos_public.gne?${params}`;
     document.head.append(script);
@@ -122,7 +122,7 @@ async function runSearch(query) {
   if (!tokens.length) return;
   grid.hidden = true;
   resultsHeading.hidden = true;
-  setStatus("loading", `Otsin: ${query}`, "Laen Flickr-ist objektiivi nimele vastavaid fotosid…");
+  setStatus("loading", `Searching: ${query}`, "Loading matching photos from Flickr…");
   try {
     let items = await requestFeed(tokens, "all", requestId);
     if (!items.length) items = await requestFeed(tokens, "any", requestId);
@@ -133,17 +133,17 @@ async function runSearch(query) {
     resultsHeading.hidden = false;
     if (!ranked.length) {
       grid.replaceChildren();
-      setStatus("empty", "Pilte ei leitud", "Proovi lühemat nime, jäta ava või bajonett välja või kasuta ainult tootjat ja fookuskaugust.");
-      resultsSummary.textContent = `Otsing „${query}“`;
+      setStatus("empty", "No photos found", "Try a shorter name, leave out the aperture or mount, or use just the brand and focal length.");
+      resultsSummary.textContent = `Search: ${query}`;
       return;
     }
     grid.replaceChildren(...ranked.map((item, index) => makeCard(item, index, query)));
     grid.hidden = false;
     status.hidden = true;
-    resultsSummary.textContent = `${ranked.length} tulemust · parimad vasted eespool`;
+    resultsSummary.textContent = `${ranked.length} results · best matches first`;
   } catch (error) {
     if (requestId !== activeRequest) return;
-    setStatus("error", "Otsing ebaõnnestus", error.message || "Palun proovi mõne hetke pärast uuesti.");
+    setStatus("error", "Search failed", error.message || "Please try again in a moment.");
   }
 }
 
